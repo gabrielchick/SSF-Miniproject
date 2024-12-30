@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Portfolios</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Investment Portfolios</h1>
+    <a href="/portfolio/add" class="btn btn-primary mb-3">Add New Portfolio</a>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Investment Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Purchase Price (SGD)</th>
+                    <th scope="col">Current Price (SGD)</th>
+                    <th scope="col">Current Price (USD)</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="portfolio : ${portfolioList}">
+                    <td th:text="${portfolio.investmentName}"></td>
+                    <td th:text="${portfolio.quantity}"></td>
+                    <td th:text="${portfolio.purchasePrice}"></td>
+                    <td th:text="${portfolio.currentPrice}"></td>
+                    <!-- Convert the SGD to USD using the conversion rate -->
+                    <td th:text="${portfolio.currentPrice * conversionRate}"></td>
+                    <td>
+                        <a th:href="@{/portfolio/view/{portfolioId}(portfolioId=${portfolio.portfolioId})}" class="btn btn-info">View</a>
+                        <a th:href="@{/portfolio/edit/{portfolioId}(portfolioId=${portfolio.portfolioId})}" class="btn btn-info">Edit</a>
+                        <a th:href="@{'/transaction/buy/' + ${portfolio.portfolioId} + '?quantity=' + ${portfolio.quantity} + '&purchasePrice=' + ${portfolio.purchasePrice}}"
+                           class="btn btn-warning">Buy</a>
+                        <a th:href="@{'/transaction/sell/' + ${portfolio.portfolioId} + '?quantity=' + ${portfolio.quantity} + '&sellPrice=' + ${portfolio.purchasePrice}}"
+                           class="btn btn-secondary">Sell</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<a href="/user/logout" class="btn btn-danger position-fixed" style="top: 10px; right: 10px; z-index: 100;">
+    <i class="fas fa-sign-out-alt"></i> Logout
+</a>
+</body>
+</html>

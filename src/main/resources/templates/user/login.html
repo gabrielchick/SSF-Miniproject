@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="text-danger" th:if="${invalid}">Invalid username/password</div>
+    <h2 class="text-center">Login</h2>
+    <form th:action="@{/user/login}" method="post" th:object="${user}">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="userName" placeholder="Enter username" th:field="*{userName}" required>
+            <div class="text-danger" th:errors="*{userName}"></div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" th:field="*{password}" required>
+            <div class="text-danger" th:errors="*{password}"></div>
+        </div>
+        <div th:if="${error}" class="alert alert-danger">
+            <span th:text="${error}"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a href="/user/registration" class="btn btn-secondary ml-2">Register</a>
+    </form>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

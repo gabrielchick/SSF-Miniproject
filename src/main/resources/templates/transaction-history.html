@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Transaction History</h1>
+    <table class="table table-bordered mt-3">
+        <thead class="thead-dark">
+            <tr>
+                <th>Transaction Type</th>
+                <th>Investment Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="transaction : ${transactions}">
+                
+                <td th:text="${transaction.transactionType}"></td>
+                <td th:text="${transaction.investmentName}"></td>
+                <td th:text="${transaction.quantity}"></td>
+                <td th:text="${transaction.price}"></td>
+                
+            </tr>
+        </tbody>
+    </table>
+    <a href="/portfolio/list" class="btn btn-primary">Back to Portfolio List</a>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<a href="/user/logout" class="btn btn-danger position-fixed" style="top: 10px; right: 10px; z-index: 100;">
+        <i class="fas fa-sign-out-alt"></i> Logout
+    </a>
+</body>
+</html>

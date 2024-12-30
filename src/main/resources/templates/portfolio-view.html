@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Portfolio Details</h1>
+    <form th:action="@{/portfolio/delete/{portfolioId}(portfolioId=${portfolio.portfolioId})}" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Portfolio ID: <span th:text="${portfolio.portfolioId}"></span></h5>
+            <p class="card-text">Investment Name: <span th:text="${portfolio.investmentName}"></span></p>
+            <p class="card-text">Quantity: <span th:text="${portfolio.quantity}"></span></p>
+            <p class="card-text">Purchase Price: <span th:text="${portfolio.purchasePrice}"></span></p>
+            <p class="card-text">Current Price: <span th:text="${portfolio.currentPrice}"></span></p>
+            <a href="/portfolio/list" class="btn btn-secondary">Back to Portfolios</a>
+            <button type="submit" class="btn btn-primary">Delete Portfolio</button>
+        </div>
+    </div>
+</form>
+</div>
+
+<!-- <a href="/user/logout" class="btn btn-danger position-fixed" style="top: 10px; right: 10px; z-index: 100;">
+        <i class="fas fa-sign-out-alt"></i> Logout
+    </a> -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<a href="/user/logout" class="btn btn-danger position-fixed" style="top: 10px; right: 10px; z-index: 100;">
+    <i class="fas fa-sign-out-alt"></i> Logout
+</a>
+</body>
+</html>
